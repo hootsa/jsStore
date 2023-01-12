@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  min-width: 200px;
+  font-family: "Open Sans", sans-serif;
+}
+.main-container {
+  max-width: 2000px;
+  overflow: hidden;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+  padding-left: 70px;
+}
+
+h3 {
+  padding-left: 5px;
+  margin-bottom: 12px;
+  color: black;
+}
+
+label {
+  cursor: pointer;
+}
+
+.store-container {
+  color: #6b5f5f;
+  position: fixed;
+  min-height: 100vh;
+  min-width: 10%;
+}
+
+.products-container {
+  min-height: 100vh;
+  margin-left: 200px;
+  margin-top: 70px;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+input[type="checkbox"] + label:before {
+  content: "\2714";
+  border: 0.1px solid #000;
+  border-radius: 3px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 8px;
+  margin-right: 8px;
+  margin-bottom: 10px;
+  color: transparent;
+}
+input[type="checkbox"]:checked + label:before {
+  background-color: MediumSeaGreen;
+  border-color: MediumSeaGreen;
+  color: #fff;
+}
+
+img {
+  width: 80%;
+  height: 100px;
+  padding-top: 50px;
+  padding-left: 20px;
+}
+
+span.sale {
+  position: absolute;
+  top: 15px;
+  border: 1px solid red;
+  color: white;
+  background-color: red;
+  border-radius: 8px;
+  padding: 2px 9px;
+  font-size: 13px;
+}
+
+h5.product-name {
+  color: gray;
+  margin-bottom: 5px;
+}
+p.product-discription {
+  margin-top: 10px;
+}
+span.star {
+  color: #ffc107;
+  font-size: 14px;
+}
+.footer {
+  padding-top: 25px;
+}
+span.primary-price {
+  color: gray;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+button.add {
+  float: right;
+  font-size: 14px;
+  background-color: #259825;
+  color: white;
+  padding-left: 10px;
+  border-radius: 6px;
+  border: none;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+button.add:hover {
+  opacity: 0.7;
+  transition: all 0.4s;
+}
+.each-product-container {
+  border: 1px solid;
+  box-sizing: border-box;
+  display: inline-block;
+  border-color: #cdc7c7;
+  border-radius: 7px;
+  padding: 12px;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: calc(25% - 10px);
+  position: relative;
+  height: 400px;
+}
+.each-product-container:hover {
+  border-color: green;
+  transition: all 0.3s;
+}
+.prices {
+  float: left;
+}
+span.rate {
+  font-size: 13px;
+}
+.bottom {
+  position: absolute;
+  bottom: 24px;
+  right: 10px;
+  left: 10px;
+}
