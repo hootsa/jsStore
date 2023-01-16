@@ -9,11 +9,7 @@ fetchFromServer();
 
 function printData(products) {
   for (let i = 0; i < products.length; i++) {
-    const eachProductContainerNode = tagClassMaker(
-      "div",
-      "each-product-container",
-      ""
-    );
+    const eachProductContainerNode = mkElement("div", "each-product-container");
     const productObj = products[i];
     const description = productObj.description.slice(0, 50) + "...";
     const discountPercentage = productObj.discountPercentage;
@@ -22,36 +18,35 @@ function printData(products) {
     const rate = productObj.rating;
     const title = productObj.title;
 
-    const spanSale = tagClassMaker("span", "", "");
+    const spanSale = mkElement("span");
 
     if (discountPercentage > 0) {
       spanSale.classList.add("sale");
       spanSale.innerHTML = "sale";
     }
 
-    const img = tagClassMaker("img", "", "");
+    const img = mkElement("img");
     img.src = image;
 
-    const h5 = tagClassMaker("h5", "product-name", title);
+    const h5 = mkElement("h5", "product-name", title);
 
-    const paragraph = tagClassMaker("p", "product-discription", description);
+    const paragraph = mkElement("p", "product-discription", description);
 
-    const divBottom = tagClassMaker("div", "bottom");
+    const divBottom = mkElement("div", "bottom");
 
-    const spanStar = tagClassMaker(
+    const spanStar = mkElement(
       "span",
       "star",
       "&starf; &bigstar; &bigstar; &bigstar; &star;"
     );
 
-    const spanRate = tagClassMaker("span", "rate", " " + rate);
+    const spanRate = mkElement("span", "rate", ` ${rate}`);
 
-    const divFooter = tagClassMaker("div", "footer");
-    console.log(divBottom);
+    const divFooter = mkElement("div", "footer");
 
-    const divPrices = tagClassMaker("div", "prices");
+    const divPrices = mkElement("div", "prices");
 
-    const spanDiscount = tagClassMaker("span", "discount-price");
+    const spanDiscount = mkElement("span", "discount-price");
 
     const calDiscountWithTwoDecimal = calDiscount(price, discountPercentage);
 
@@ -59,7 +54,7 @@ function printData(products) {
       spanDiscount.innerHTML = " $" + calDiscountWithTwoDecimal;
     }
 
-    const spanPrimaryPrice = tagClassMaker("span", "primary-price");
+    const spanPrimaryPrice = mkElement("span", "primary-price");
 
     if (discountPercentage !== 0) {
       spanPrimaryPrice.innerHTML = "$" + price;
@@ -67,7 +62,7 @@ function printData(products) {
       spanPrimaryPrice.innerHTML = "";
     }
 
-    const addBtn = tagClassMaker("button", "add", " + Add ");
+    const addBtn = mkElement("button", "add", " + Add ");
 
     const productContainerNOde = document.getElementById("p-container");
     divFooter.appendChild(divPrices);
@@ -86,13 +81,7 @@ function printData(products) {
   }
 }
 
-// Boolean('')
-// 0
-// false
-// undefined
-// null
-
-function tagClassMaker(tagName, className, contentName) {
+function mkElement(tagName, className, contentName) {
   const tag = document.createElement(tagName);
   if (Boolean(className)) {
     tag.classList.add(className);
