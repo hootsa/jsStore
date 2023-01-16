@@ -9,9 +9,11 @@ fetchFromServer();
 
 function printData(products) {
   for (let i = 0; i < products.length; i++) {
-    const eachProductContainerNode = document.createElement("div");
-    eachProductContainerNode.classList.add("each-product-container");
-
+    const eachProductContainerNode = tagClassMaker(
+      "div",
+      "each-product-container",
+      ""
+    );
     const productObj = products[i];
     const description = productObj.description.slice(0, 50) + "...";
     const discountPercentage = productObj.discountPercentage;
@@ -20,71 +22,52 @@ function printData(products) {
     const rate = productObj.rating;
     const title = productObj.title;
 
-    const spanSale = document.createElement("span");
+    const spanSale = tagClassMaker("span", "", "");
 
     if (discountPercentage > 0) {
       spanSale.classList.add("sale");
       spanSale.innerHTML = "sale";
     }
 
-    const img = document.createElement("img");
+    const img = tagClassMaker("img", "", "");
     img.src = image;
 
-    const h5 = document.createElement("h5");
-    h5.classList.add("product-name");
-    h5.innerHTML = title;
+    const h5 = tagClassMaker("h5", "product-name", title);
 
-    const paragraph = document.createElement("p");
-    paragraph.classList.add("product-discription");
-    paragraph.innerHTML = description;
+    const paragraph = tagClassMaker("p", "product-discription", description);
 
-    const divBottom = document.createElement("div");
-    divBottom.classList.add("bottom");
+    const divBottom = tagClassMaker("div", "bottom");
 
-    const spanStar = document.createElement("span");
-    spanStar.classList.add("star");
-    spanStar.innerHTML = " &starf; &bigstar; &bigstar; &bigstar; &star;";
+    const spanStar = tagClassMaker(
+      "span",
+      "star",
+      "&starf; &bigstar; &bigstar; &bigstar; &star;"
+    );
 
-    const spanRate = document.createElement("span");
-    spanRate.classList.add("rate");
-    spanRate.innerHTML = " " + rate;
+    const spanRate = tagClassMaker("span", "rate", " " + rate);
 
-    // <div class="footer"></div>
-    const divFooter = document.createElement("div");
-    divFooter.classList.add("footer");
+    const divFooter = tagClassMaker("div", "footer");
+    console.log(divBottom);
 
-    // <div class="prices"></div<>
-    const divPrices = document.createElement("div");
-    divPrices.classList.add("prices");
+    const divPrices = tagClassMaker("div", "prices");
 
-    // <span class="discount-price">$18</span>
-    const spanDiscount = document.createElement("span");
-    spanDiscount.classList.add("discount-price");
-    const calDiscount = price - (price * discountPercentage) / 100;
-    const calDiscountWithTwoDecimal = calDiscount.toFixed(2);
-    console.log("xxxx", {
-      title: title,
-      discountPercentage: discountPercentage,
-      calDiscount: calDiscount,
-      price: price,
-    });
-    console.log(typeof discountPercentage);
-    console.log(discountPercentage !== 0);
+    const spanDiscount = tagClassMaker("span", "discount-price");
+
+    const calDiscountWithTwoDecimal = calDiscount(price, discountPercentage);
+
     if (discountPercentage !== 0) {
       spanDiscount.innerHTML = " $" + calDiscountWithTwoDecimal;
     }
-    // <span class="primary-price"> $24</span>
-    const spanPrimaryPrice = document.createElement("span");
-    spanPrimaryPrice.classList.add("primary-price");
+
+    const spanPrimaryPrice = tagClassMaker("span", "primary-price");
+
     if (discountPercentage !== 0) {
       spanPrimaryPrice.innerHTML = "$" + price;
     } else {
       spanPrimaryPrice.innerHTML = "";
     }
 
-    const addBtn = document.createElement("button");
-    addBtn.classList.add("add");
-    addBtn.innerHTML = " + Add ";
+    const addBtn = tagClassMaker("button", "add", " + Add ");
 
     const productContainerNOde = document.getElementById("p-container");
     divFooter.appendChild(divPrices);
@@ -100,18 +83,28 @@ function printData(products) {
     eachProductContainerNode.appendChild(paragraph);
     eachProductContainerNode.appendChild(divBottom);
     productContainerNOde.appendChild(eachProductContainerNode);
-    // console.log(eachProductContainerNode);
-    // productContainerNOde.appendChild("p-container");
   }
 }
-// function saleTage(products) {
-//   for (let i = 0; i < products.length; i++) {
-//     const productObj = products[i];
-//     const discountRate = productObj.discountPercentage;
 
-//     if(discountRate >0){
+// Boolean('')
+// 0
+// false
+// undefined
+// null
 
-//     }
-//   }
-// }
-//
+function tagClassMaker(tagName, className, contentName) {
+  const tag = document.createElement(tagName);
+  if (Boolean(className)) {
+    tag.classList.add(className);
+  }
+  if (!!contentName) {
+    tag.innerHTML = contentName;
+  }
+  return tag;
+}
+
+function calDiscount(price, discountPercentage) {
+  const cal = price - (price * discountPercentage) / 100;
+  const calDiscountWithTwoDecimal = cal.toFixed(2);
+  return calDiscountWithTwoDecimal;
+}
