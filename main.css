@@ -27,6 +27,43 @@ label {
   min-height: 100vh;
   min-width: 10%;
 }
+.input-wrapper {
+  position: relative;
+  margin-top: 30px;
+  margin-left: 200px;
+  width: 64%;
+}
+.searchInput {
+  font-size: 16px;
+  padding: 9px 40px 6px 7px;
+  display: block;
+  position: relative;
+  border: 1px solid #d0c2c2;
+  border-right: none;
+  border-bottom-left-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
+  width: 99.5%;
+  box-sizing: border-box;
+  padding-right: 45px;
+}
+.searchBtn {
+  background-color: #f3a846;
+  width: 3rem;
+  height: 2.23rem;
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border: none;
+  font-size: 30px;
+  border-bottom-right-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  cursor: pointer;
+  padding-right: 43px;
+}
+.searchInput:focus-visible {
+  outline-color: #ff9100;
+}
 
 .products-container {
   min-height: 100vh;
@@ -58,10 +95,11 @@ input[type="checkbox"]:checked + label:before {
 }
 
 img {
-  width: 80%;
+  width: 200px;
   height: 100px;
+  object-fit: contain;
   padding-top: 50px;
-  padding-left: 20px;
+  text-align: center;
 }
 
 span.sale {

@@ -1,7 +1,9 @@
+let productData = [];
+
 async function fetchFromServer() {
   const response = await fetch("https://dummyjson.com/products");
   const data = await response.json();
-  //   console.log(data.products);
+  productData = data.products;
   printData(data.products);
 }
 
@@ -9,7 +11,7 @@ fetchFromServer();
 
 function printData(products) {
   for (let i = 0; i < products.length; i++) {
-    const eachProductContainerNode = mkElement("div", "each-product-container");
+    // gather all data needed
     const productObj = products[i];
     const description = productObj.description.slice(0, 50) + "...";
     const discountPercentage = productObj.discountPercentage;
@@ -19,20 +21,17 @@ function printData(products) {
     const title = productObj.title;
 
     const spanSale = mkElement("span");
+    spanSale.classList.add("sale");
+    spanSale.innerHTML = "sale";
 
-    if (discountPercentage > 0) {
-      spanSale.classList.add("sale");
-      spanSale.innerHTML = "sale";
-    }
-
+    const divImgWrapper = mkElement("div", "img-wrapper");
     const img = mkElement("img");
     img.src = image;
+    divImgWrapper.appendChild(img);
 
     const h5 = mkElement("h5", "product-name", title);
 
     const paragraph = mkElement("p", "product-discription", description);
-
-    const divBottom = mkElement("div", "bottom");
 
     const spanStar = mkElement(
       "span",
@@ -42,8 +41,10 @@ function printData(products) {
 
     const spanRate = mkElement("span", "rate", ` ${rate}`);
 
+    // Footer
     const divFooter = mkElement("div", "footer");
 
+    // Prices
     const divPrices = mkElement("div", "prices");
 
     const spanDiscount = mkElement("span", "discount-price");
@@ -61,23 +62,32 @@ function printData(products) {
     } else {
       spanPrimaryPrice.innerHTML = "";
     }
+    divPrices.appendChild(spanDiscount);
+    divPrices.appendChild(spanPrimaryPrice);
 
     const addBtn = mkElement("button", "add", " + Add ");
-
-    const productContainerNOde = document.getElementById("p-container");
     divFooter.appendChild(divPrices);
-    divFooter.appendChild(spanDiscount);
-    divFooter.appendChild(spanPrimaryPrice);
     divFooter.appendChild(addBtn);
+
+    const divBottom = mkElement("div", "bottom");
     divBottom.appendChild(spanStar);
     divBottom.appendChild(spanRate);
     divBottom.appendChild(divFooter);
-    eachProductContainerNode.appendChild(spanSale);
-    eachProductContainerNode.appendChild(img);
+
+    // each product container
+    const eachProductContainerNode = mkElement("div", "each-product-container");
+    if (discountPercentage > 0) {
+      eachProductContainerNode.appendChild(spanSale);
+    }
+
+    eachProductContainerNode.appendChild(divImgWrapper);
     eachProductContainerNode.appendChild(h5);
     eachProductContainerNode.appendChild(paragraph);
     eachProductContainerNode.appendChild(divBottom);
-    productContainerNOde.appendChild(eachProductContainerNode);
+
+    // add each product into html container
+    const productContainerNode = document.getElementById("p-container");
+    productContainerNode.appendChild(eachProductContainerNode);
   }
 }
 
@@ -97,3 +107,31 @@ function calDiscount(price, discountPercentage) {
   const calDiscountWithTwoDecimal = cal.toFixed(2);
   return calDiscountWithTwoDecimal;
 }
+
+const searchBtnElement = document.getElementById("productsSearch");
+searchBtnElement.addEventListener("input", search);
+
+function search() {
+  // 1.
+  // 2. call filterProducts
+}
+
+// get: searchInput
+// retusn: array of products ( productData) which includes that searchInput in their title
+function filterProducts(searchInput) {
+  // productData
+  let result = [];
+  // for (let i = 0; i < data.products.length; i++) {
+  //   const productObj = data.products[i];
+  //   const title = productObj.title;
+  //   const contain = inclues(title, element);
+  //   if (contain) {
+  //     result.push(contain);
+  //   }
+  // }
+  return result;
+}
+
+const newFilteredArray = filterProducts("An");
+console.log(newFilteredArray);
+printData(newFilteredArray);
