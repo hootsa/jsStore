@@ -4,10 +4,6 @@ async function fetchFromServer() {
   const response = await fetch("https://dummyjson.com/products");
   const data = await response.json();
   productData = data.products;
-
-  // const newFilteredArray = filterProducts("Iphone");
-  // console.log(newFilteredArray);
-
   printData(data.products);
 }
 
@@ -98,6 +94,7 @@ function printData(products) {
 function mkElement(tagName, className, contentName) {
   const tag = document.createElement(tagName);
   if (Boolean(className)) {
+    //if className was true
     tag.classList.add(className);
   }
   if (!!contentName) {
@@ -118,28 +115,15 @@ searchBtnElement.addEventListener("input", search);
 function search() {
   // 1. get input value
   const searchValue = searchBtnElement.value;
-  const newDataProduct = filterProducts(searchValue);
-  console.log(newDataProduct);
-  const productContainerNode = document.getElementById("p-container");
-  productContainerNode.innerHTML = "";
-  printData(newDataProduct);
-  // 2. call filterProducts
-}
-
-// get: searchInput
-// retusn: array of products ( productData) which includes that searchInput in their title
-function filterProducts(searchInput) {
-  let result = [];
-  for (let i = 0; i < productData.length; i++) {
-    const productObj = productData[i];
+  const filterData = productData.filter((productObj) => {
     const title = productObj.title;
     const lowCaseTitle = title.toLowerCase();
-    const lowCaseSearchInput = searchInput.toLowerCase();
+    const lowCaseSearchInput = searchValue.toLowerCase();
     const isContain = lowCaseTitle.includes(lowCaseSearchInput);
-
-    if (isContain) {
-      result.push(productObj);
-    }
-  }
-  return result;
+    return isContain;
+  });
+  const productContainerNode = document.getElementById("p-container");
+  productContainerNode.innerHTML = ""; // for earasing old productdata from page
+  printData(filterData);
+  // 2. call filterProducts
 }
