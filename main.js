@@ -119,11 +119,26 @@ function search() {
     const title = productObj.title;
     const lowCaseTitle = title.toLowerCase();
     const lowCaseSearchInput = searchValue.toLowerCase();
-    const isContain = lowCaseTitle.includes(lowCaseSearchInput);
-    return isContain;
+    const isContainTitle = lowCaseTitle.includes(lowCaseSearchInput);
+    return isContainTitle;
   });
-  const productContainerNode = document.getElementById("p-container");
-  productContainerNode.innerHTML = ""; // for earasing old productdata from page
+  const searchValue2 = searchBtnElement.value;
+  const filterDescription = productData.filter((productObj) => {
+    const description = productObj.description;
+    const lowCaseDescription = description.toLowerCase();
+    const lowCaseSearchInput = searchValue2.toLowerCase();
+    const isContainDescription =
+      lowCaseDescription.includes(lowCaseSearchInput);
+    console.log(searchValue2);
+    return isContainDescription;
+  });
+  clearPage();
   printData(filterData);
-  // 2. call filterProducts
+  printData(filterDescription);
+}
+
+function clearPage() {
+  const productContainerNode = document.getElementById("p-container");
+  productContainerNode.innerHTML = "";
+  return productContainerNode;
 }
