@@ -12,7 +12,8 @@ fetchFromServer();
 async function categoryFetchFromServer() {
   const response = await fetch("https://dummyjson.com/products/categories");
   const dataCatagory = await response.json();
-  console.log(dataCatagory);
+  // console.log(dataCatagory);
+  printCatagory(dataCatagory);
 }
 
 categoryFetchFromServer();
@@ -150,3 +151,24 @@ function clearPage() {
   productContainerNode.innerHTML = "";
   return productContainerNode;
 }
+
+function printCatagory(dataCatagory) {
+  for (let i = 0; i < dataCatagory.length; i++) {
+    const catagoryItem = dataCatagory[i];
+    const divInput = mkElement("div");
+    const input = mkElement("input");
+    input.setAttribute("id", catagoryItem);
+    input.setAttribute("type", "checkbox");
+    const label = mkElement("label");
+    label.setAttribute("for", catagoryItem);
+    label.innerHTML = catagoryItem;
+    divInput.appendChild(input);
+    divInput.appendChild(label);
+    const sContainer = document.getElementById("s-container");
+    sContainer.appendChild(divInput);
+    console.log(sContainer);
+  }
+}
+
+// const storesElement = document.getElementById("s-container");
+// storesElement.addEventListener()
