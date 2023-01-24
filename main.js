@@ -9,6 +9,14 @@ async function fetchFromServer() {
 
 fetchFromServer();
 
+async function categoryFetchFromServer() {
+  const response = await fetch("https://dummyjson.com/products/categories");
+  const dataCatagory = await response.json();
+  console.log(dataCatagory);
+}
+
+categoryFetchFromServer();
+
 function printData(products) {
   for (let i = 0; i < products.length; i++) {
     // gather all data needed
