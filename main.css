@@ -164,6 +164,25 @@ button.add:hover {
   position: relative;
   height: 400px;
 }
+
+@media only screen and (max-width: 990px) {
+  .each-product-container {
+    width: calc(33% - 10px);
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .each-product-container {
+    width: calc(50% - 10px);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .each-product-container {
+    width: calc(100% - 10px);
+  }
+}
+
 .each-product-container:hover {
   border-color: green;
   transition: all 0.3s;
